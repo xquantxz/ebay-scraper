@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+</head>
+<body>
+    <form action="/new" method="post" onsubmit="event.preventdefault()">
+        <label>
+            URL:
+            <input name="url" />
+        </label>
+        <label>
+            Max price:
+            <input name="max_price" />
+        </label>
+        <label>
+            Max likes:
+            <input name="max_likes" />
+        </label>
+        <button>Save</button>
+    </form>
+
+    <br />
+
+    <table class="pure-table pure-table-bordered">
+        <thead>
+        <tr>
+            <th>URL</th>
+            <th>Max price</th>
+            <th>Max likes</th>
+        </tr>
+        </thead>
+        <tbody>
+	{% for term in terms %}
+        <tr>
+            <td>{{ term.url }}</td>
+            <td>{{ term.max_price }}</td>
+            <td>{{ term.max_likes }}</td>
+        </tr>
+	{% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
