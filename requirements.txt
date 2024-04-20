@@ -1,5 +1,5 @@
 SQLAlchemy
 requests
-BeautifulSoup
+beautifulsoup4
 Flask
 
