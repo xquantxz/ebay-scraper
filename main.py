@@ -15,11 +15,13 @@ class Scraper:
     LANG_SETTINGS = {
         "de": {
             "time_regex": r"((\d+)T )?((\d+)Std ?)?((\d+) Min)?",
-            "free_text": "Kostenlos"
+            "free_text": "Kostenlos",
+            "currency": "EUR %.2f"
         },
         "pl": {
             "time_regex": r"((\d+)d )?((\d+)h )?((\d+)m)?",
-            "free_text": "Bezpłatna"
+            "free_text": "Bezpłatna",
+            "currency": "%.2f zł"
         }
     }
 
@@ -84,7 +86,7 @@ class Scraper:
 
             if total_price <= max_price and bids < 2 and hours == 0 and days == 0:
                 self.notify(title, f"""
-                Total price: EUR {total_price}
+                Total price: {self.lang["currency"] % total_price}
                 Time left: {hours} hours {mins} mins
                 Link: {link}
                 """)
