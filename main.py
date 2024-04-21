@@ -19,7 +19,7 @@ class Scraper:
             "currency": "EUR %.2f"
         },
         "pl": {
-            "time_regex": r"((\d+)d )?((\d+)h )?((\d+)m)?",
+            "time_regex": r"[^\d]*((\d+)d )?((\d+)h )?((\d+)m)?",
             "free_text": "Bezpłatna",
             "currency": "%.2f zł"
         }
@@ -62,6 +62,7 @@ class Scraper:
             title_elem = title_elem or link_elem.find("div", class_="s-item__title")
 
             title = title_elem.text.strip()
+            print("scrapping " + title)
 
             price = self.handle_price(item.find("span", class_="s-item__price").text.strip())
 
@@ -78,10 +79,15 @@ class Scraper:
                 bids = 1000
 
             # parse remaining time
-            tmp = item.find("span", class_="s-item__time-left").text
-            m = re.search(self.lang["time_regex"], tmp)
+            tmp = item.find("span", class_="s-item__time-left")
+
+            # skip fake ebay item
+            if tmp is None:
+                continue
+
+            m = re.search(self.lang["time_regex"], tmp.text)
             if m is None:
-                print("failed to match remaining time:", tmp)
+                print("failed to match remaining time:", tmp.text)
                 continue
 
             days, hours, mins = m.group(2) or 0, m.group(4) or 0, m.group(6) or 0
@@ -145,7 +151,7 @@ class Scraper:
 def main():
     engine = create_engine(DATABASE_URL)
     Base.metadata.create_all(engine)
-    scraper = Scraper(engine, WEBHOOK_URL, SCRAP_INTERVAL)
+    scraper = Scraper(engine, WEBHOOK_URL, SCRAP_INTERVAL, lang_code=LANGUAGE_CODE)
 
     scraper.run()
 
