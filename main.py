@@ -57,7 +57,11 @@ class Scraper:
         for item in items:
             link_elem = item.find("a", class_="s-item__link")
             link = link_elem["href"]
-            title = link_elem.find("h3", class_="s-item__title").text.strip()
+
+            title_elem = link_elem.find("h3", class_="s-item__title")
+            title_elem = title_elem or link_elem.find("div", class_="s-item__title")
+
+            title = title_elem.text.strip()
 
             price = self.handle_price(item.find("span", class_="s-item__price").text.strip())
 
