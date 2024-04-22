@@ -94,7 +94,7 @@ class Scraper:
 
             total_price = round(price + ship_cost, 2)
 
-            if total_price <= max_price and bids < 2 and hours == 0 and days == 0:
+            if total_price <= max_price and hours == 0 and days == 0:
                 self.notify(title, f"""
                 Total price: {self.lang["currency"] % total_price}
                 Time left: {hours} hours {mins} mins
