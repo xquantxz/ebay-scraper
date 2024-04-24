@@ -14,7 +14,7 @@ from config import *
 class Scraper:
     LANG_SETTINGS = {
         "de": {
-            "time_regex": r"((\d+)T )?((\d+)Std ?)?((\d+) Min)?",
+            "time_regex": r"((\d+)T ?)?((\d+)Std ?)?((\d+) Min)?",
             "free_text": "Kostenlos",
             "currency": "EUR %.2f"
         },
