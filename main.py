@@ -91,6 +91,7 @@ class Scraper:
                 continue
 
             days, hours, mins = m.group(2) or 0, m.group(4) or 0, m.group(6) or 0
+            days, hours, mins = int(days), int(hours), int(mins)
 
             total_price = round(price + ship_cost, 2)
 
