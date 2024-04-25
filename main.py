@@ -19,7 +19,7 @@ class Scraper:
             "currency": "EUR %.2f"
         },
         "pl": {
-            "time_regex": r"[^\d]*((\d+)d )?((\d+)h )?((\d+)m)?",
+            "time_regex": r"[^\d]*((\d+)d ?)?((\d+)h ?)?((\d+)m)?",
             "free_text": "Bezpłatna",
             "currency": "%.2f zł"
         }
