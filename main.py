@@ -40,8 +40,14 @@ class Scraper:
             with Session(self.engine) as session:
                 stmt = select(WatchedTerm)
                 for term in session.scalars(stmt):
-                    url = self.make_scrap_url(term.url, term.max_price)
-                    self.scrap(url, term.max_price, term.max_likes)
+                    for i in range(1,4):
+                        url = self.make_scrap_url(term.url, term.max_price, page=i)
+
+                        try:
+                            self.scrap(url, term.max_price, term.max_likes)
+                        except Exception as e:
+                            print("Exception occurred:", e)
+                            continue
             
             time.sleep(self.interval)
 
